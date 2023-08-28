@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <div className='black-nav'>
-        <h4>블로그임</h4>
+        <h4>Test</h4>
       </div>
       <button onClick={() => {
         let copy = [...title];
