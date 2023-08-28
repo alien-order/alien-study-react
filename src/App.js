@@ -62,17 +62,20 @@ function App() {
         setInputData(e.target.value);
       }}></input>
       <button onClick={() => {
-        let copyInputData = [inputData, ...title];
-        let copyLike = [0, ...like];
-        setTitle(copyInputData);
-        setLike(copyLike);
-        setInputData('');
+        // let copyInputData = [inputData, ...title];
+        // let copyLike = [0, ...like];
+        // setTitle(copyInputData);
+        // setLike(copyLike);
+        // setInputData('');
+        let copy = [...title];
+        copy.unshift(inputData);
+        setTitle(copy);
       }}>저장</button>
 
       {
         modal === true ? <Modal title={ title } modalTitle={ modalTitle } setTitle={ setTitle }></Modal> : null
       }
-
+      
     </div>
   );
 }
@@ -91,5 +94,25 @@ function Modal(props){
     </div>
   );
 }
+
+/*
+class Modal2 extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      name : 'kim',
+      age : 20,
+    }
+  }
+  render(){
+    return(
+      <div>안녕2 { this.state.name }</div>
+      <button onClick={() => {
+        this.setState({age : 21});
+      }}></button>
+    )
+  }
+}
+*/
 
 export default App;
