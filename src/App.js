@@ -13,7 +13,8 @@ function App() {
   let [like1, setLike1] = useState(0);
   let [like, setLike] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
-  let [modalTitle, setModalTitle] = useState('');
+  let [modalTitle, setModalTitle] = useState(0);
+  let [inputData, setInputData] = useState('');
   
   return (
     <div className="App">
@@ -38,7 +39,7 @@ function App() {
             <div className='list' key={i}>
               <h4 onClick={() => {
                 setModal(true);
-                setModalTitle(title[i]);
+                setModalTitle(i);
               }}>{ title[i] }
                 <span onClick={() => {
                   let copyLike = [...like];
@@ -47,13 +48,29 @@ function App() {
                 }}>👍</span>
                 { like[i] }
               </h4>
+              <button onClick={() => {
+                let copy123 = [...title];
+                copy123.splice(i, 1);
+                setTitle(copy123);
+              }}>삭제</button>
             </div>
           )
         })
       }
 
+      <input value={ inputData } onChange={(e) => {
+        setInputData(e.target.value);
+      }}></input>
+      <button onClick={() => {
+        let copyInputData = [inputData, ...title];
+        let copyLike = [0, ...like];
+        setTitle(copyInputData);
+        setLike(copyLike);
+        setInputData('');
+      }}>저장</button>
+
       {
-        modal === true ? <Modal modalTitle={ modalTitle } setTitle={ setTitle }></Modal> : null
+        modal === true ? <Modal title={ title } modalTitle={ modalTitle } setTitle={ setTitle }></Modal> : null
       }
 
     </div>
@@ -63,7 +80,7 @@ function App() {
 function Modal(props){
   return (
     <div className='modal'>
-      <h4>{ props.modalTitle }</h4>
+      <h4>{ props.title[props.modalTitle] }</h4>
       <p>날짜</p>
       <p>상세내용</p>
       <button onClick={() => {
